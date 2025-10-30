@@ -1,0 +1,18 @@
+{
+	"name": "hexo-theme-kumoi",
+	"version": "0.0.0",
+	"description": "A simple theme for Hexo.",
+	"keywords": [
+		"hexo",
+		"theme",
+		"kumoi"
+	],
+	"author": "yamrc <yamrci@outlook.com>",
+	"license": "MIT",
+	"dependencies": {
+		"hexo-renderer-pug": "^3.0.0",
+		"hexo-renderer-stylus": "^3.0.1",
+		"hexo-util": "^4.0.0"
+	},
+	"packageManager": "pnpm@10.15.0"
+}
