@@ -1,6 +1,11 @@
 aside#sidebar
+	- const isPost = page.layout === 'post' || page.type === 'post'
+	- const defaultsPost = ['author','toc','recent_posts']
+	- const defaultsOther = ['author','recent_posts','categories','tags','archives']
+	- const cfgWidgets = theme.sidebar && theme.sidebar.widgets
+	- const widgets = Array.isArray(cfgWidgets) && cfgWidgets.length ? cfgWidgets : (isPost ? defaultsPost : defaultsOther)
 	if theme.sidebar && theme.sidebar.enable !== false
-		each w in theme.sidebar.widgets || []
+		each w in widgets
 			- const widgetConfig = typeof w === 'object' ? w : { name: w, force: false }
 			- const widgetName = widgetConfig.name || w
 			- const forceShow = widgetConfig.force === true
@@ -14,5 +19,6 @@ aside#sidebar
 				include ../widgets/tags
 			if widgetName === 'archives'
 				include ../widgets/archives
-		if page.layout === 'post' || page.type === 'post'
-			include ../widgets/toc
+			if widgetName === 'toc'
+				if isPost
+					include ../widgets/toc

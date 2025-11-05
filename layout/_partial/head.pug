@@ -1,6 +1,5 @@
 meta(charset="utf-8")
 meta(name="viewport" content="width=device-width, initial-scale=1")
-
 //- TODO: 由页面内容决定title
 title #{config.title}
 link(rel="icon" href=theme.site && theme.site.favicon ? theme.site.favicon : "/favicon.ico")
@@ -13,6 +12,9 @@ script(type='module' src='/js/core/lifecycle.js')
 //- 暂时先硬编码
 if theme.comments && theme.comments.enable && theme.comments.type === 'twikoo'
 	script(src='https://cdn.jsdelivr.net/npm/twikoo@1.6.17/dist/twikoo.all.min.js' defer)
+	script(type='module').
+		import { mountTwikoo } from '/js/adapters/comments/twikoo.js'
+		mountTwikoo(!{JSON.stringify(theme.comments.twikoo || {})})
 
 //- WOW.js其实还没有完全适配
 if theme.effects && theme.effects.wow && theme.effects.wow.enable

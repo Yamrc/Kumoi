@@ -2,6 +2,11 @@ section.widget.widget-tags
 	h3= __('widget.tags')
 	- const tagList = site.tags && site.tags.sort('name').toArray() || []
 	if tagList.length
-		.tag-cloud
+		.tag-list
 			each t in tagList
-				a.tag(href=url_for(t.path))= `${t.name} (${t.length})`
+				- const href = url_for(t.path)
+				- const name = t.name
+				- const count = t.length
+				a.tag-text(href=href, title=name)
+					span.name= name
+					span.count= count

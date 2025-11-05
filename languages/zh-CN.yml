@@ -8,6 +8,9 @@ pagination:
   next: 下一页
 
 page:
+  published_at: 发表于
+  untitled: 无标题
+  comments: 评论
   archives:
     title: 归档
   categories:

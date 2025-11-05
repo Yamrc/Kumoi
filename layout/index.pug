@@ -9,23 +9,11 @@ block content
 				ul
 					each post in rec
 						li
-							a(href=url_for(post.path))= post.title
+							- const rtitle = post.title || __('page.untitled')
+							a(href=url_for(post.path))= rtitle
 	.posts
-		each post in page.posts && page.posts.data || []
-			article.post
-				if post.cover
-					a.post-cover(href=url_for(post.path))
-						img(src=post.cover alt=post.title)
-				h2.post-title
-					a(href=url_for(post.path))= post.title
-				.post-meta
-					span.badge.badge-date= date(post.date, 'YYYY-MM-DD')
-					if post.categories && post.categories.length
-						- const cats = post.categories.toArray()
-						each c, i in cats
-							a.badge.badge-cat(href=url_for(c.path))= c.name
-				if post.excerpt
-					.post-excerpt!= post.excerpt
+		include _partial/mixins/post_list
+		+postList(page.posts && page.posts.data || [])
 		if page.total > 1
 			nav.pagination
 			if page.prev

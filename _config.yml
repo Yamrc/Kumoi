@@ -34,6 +34,9 @@ nav:
   - text: 归档
     link: /archives/
 
+cover:
+  default: https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
+
 # Appearance
 appearance:
   theme_color: "#3b82f6" # primary
@@ -45,6 +48,7 @@ sidebar:
   enable: true
   widgets:
     - author
+    - toc # only in post pages
     - recent_posts
     - categories
     - tags
@@ -52,10 +56,10 @@ sidebar:
 
 # Comments (only twikoo or giscus)
 comments:
-  enable: false
+  enable: true
   type: twikoo # twikoo | giscus
   twikoo:
-    env_id: ""
+    env_id: https://twik.api.yamr.cc/
   giscus:
     repo: ""
     repo_id: ""
@@ -91,6 +95,6 @@ effects:
 # Home recommendation (build-time selection)
 home:
   recommend:
-    enable: false
+    enable: true
     count: 3 # number of posts to show
     mode: pin_first # pin_first | random

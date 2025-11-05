@@ -2,12 +2,9 @@ extends _partial/layout
 
 block content
 	h1= __('page.archives.title')
-	.archives
-		if site && site.posts && site.posts.length
-			ul
-				each post in site.posts.sort('date', -1).toArray()
-					li
-						a(href=url_for(post.path))= post.title
-						span.date= ' ' + date(post.date, 'YYYY-MM-DD')
-		else
-			p No posts
+	if site && site.posts && site.posts.length
+		- const list = site.posts.sort('date', -1).toArray()
+		include _partial/mixins/article_sort
+		+articleSort(list)
+	else
+		p No posts

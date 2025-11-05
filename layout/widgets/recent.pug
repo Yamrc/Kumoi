@@ -1,9 +1,17 @@
 section.widget.widget-recent
 	h3= __('widget.recent_posts')
-	- const list = site.posts && site.posts.sort('date', -1).limit(5).toArray() || []
+	- const recentLimit = (theme.sidebar && theme.sidebar.recent_limit) || 3
+	- const list = site.posts && site.posts.sort('date', -1).limit(recentLimit).toArray() || []
 	if list.length
 		ul.recent-list
 			each p in list
-				li
-					a(href=url_for(p.path))= p.title
-					span.date= ' ' + date(p.date, 'YYYY-MM-DD')
+				li.recent-item
+					- const href = url_for(p.path)
+					- const title = p.title || __('page.untitled')
+					- const cover = p.cover
+					if cover
+						a.pic(href=href, title=title)
+							img(src=cover, alt=title)
+					.info
+						a.title(href=href, title=title)= title
+						.time= date(p.date, 'YYYY-MM-DD')

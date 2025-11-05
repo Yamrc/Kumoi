@@ -1,9 +1,15 @@
 section.widget.widget-archives
 	h3= __('widget.archives')
-	- const years = {};
-	- (site.posts && site.posts.toArray() || []).forEach(p => { const y = date(p.date, 'YYYY'); years[y] = (years[y]||0)+1 })
-	if Object.keys(years).length
-		ul.arc-list
-			each cnt, y in years
-				li
-					a(href=url_for(`/archives/${y}/`))= `${y} (${cnt})`
+	- const months = {}
+	- (site.posts && site.posts.toArray() || []).forEach(p => { const ym = date(p.date, 'YYYY-MM'); months[ym] = (months[ym]||0)+1 })
+	- const keys = Object.keys(months).sort((a,b) => b.localeCompare(a))
+	if keys.length
+		ul.arc-grid
+			each ym in keys
+				- const cnt = months[ym]
+				- const parts = ym.split('-')
+				- const label = `${parts[0]}年${parts[1]}月`
+				li.arc-item
+					a.arc-box(href=url_for(`/archives/${ym}/`))
+						div.year= label
+						div.count= `${cnt} 篇`

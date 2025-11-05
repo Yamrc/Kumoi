@@ -1,6 +1,10 @@
 export function initTOC() {
-	const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3')
-	if (!headings.length) return
+	let headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3')
+	if (!headings.length) {
+		const title = document.querySelector('h1.post-title')
+		if (title) headings = [title]
+		else return
+	}
 
 	const sidebarTocWidget = document.getElementById('sidebar-toc')
 	const sidebarToc = document.getElementById('toc-sidebar')

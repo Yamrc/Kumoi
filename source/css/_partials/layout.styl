@@ -152,10 +152,18 @@ img { max-width: 100%; display: block; }
 	#content-inner
 		width: 100%
 		flex: 1
+		min-width: 0
+		.post-full, .post, .page
+			max-width: 100%
+			width: 100%
+			overflow: hidden
 	#sidebar
 		max-width: 312px
 		min-width: 300px
 		padding-left: 15px
+		position: sticky
+		top: 80px
+		align-self: start
 
 @media (min-width: 2000px)
 	.layout { max-width: 70%; }
