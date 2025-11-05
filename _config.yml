@@ -1,0 +1,96 @@
+# Site brand & basic
+site:
+  title: Kumoi
+  subtitle: ""
+  description: ""
+  logo:
+  favicon: /favicon.ico
+  banner: https://api.dujin.org/bing/1920.php # e.g. /images/banner.jpg
+  avatar: /img/avatar.jpg
+  # Author card background (optional, leave empty to use default)
+  author_background:
+  author_background_dark:
+  # Author widget button (optional)
+  button:
+    enable: false
+    icon: fab fa-github # Font Awesome icon class
+    text: Follow Me
+    link: https://github.com/yourusername
+  # Social icons (optional)
+  # Format: icon: "link||title||color"
+  # Example: "fab fa-github": "https://github.com/user||GitHub||#333"
+  social:
+    # "fab fa-github": "https://github.com/user||GitHub||#333"
+    # "fab fa-twitter": "https://twitter.com/user||Twitter||#1DA1F2"
+
+# Header
+header:
+  fixed: true # Enable fixed header with glassmorphism effect
+
+# Navigation (simple example)
+nav:
+  - text: 首页
+    link: /
+  - text: 归档
+    link: /archives/
+
+# Appearance
+appearance:
+  theme_color: "#3b82f6" # primary
+  rounded: true
+  dark_mode: auto # auto | light | dark
+
+# Sidebar widgets (minimal set)
+sidebar:
+  enable: true
+  widgets:
+    - author
+    - recent_posts
+    - categories
+    - tags
+    - archives
+
+# Comments (only twikoo or giscus)
+comments:
+  enable: false
+  type: twikoo # twikoo | giscus
+  twikoo:
+    env_id: ""
+  giscus:
+    repo: ""
+    repo_id: ""
+    category: ""
+    category_id: ""
+    mapping: pathname
+    theme: auto
+
+# Search: local only (searchdb)
+search:
+  enable: true
+  provider: local
+
+# Analytics: disabled by default
+analytics:
+  enable: false
+  provider: none # cloudflare | umami | none
+  cloudflare:
+    token: ""
+  umami:
+    src: ""
+    website_id: ""
+
+# PJAX: optional, default off
+pjax:
+  enable: false
+
+# Optional effects
+effects:
+  wow:
+    enable: true # default off; desktop-only when enabled
+
+# Home recommendation (build-time selection)
+home:
+  recommend:
+    enable: false
+    count: 3 # number of posts to show
+    mode: pin_first # pin_first | random

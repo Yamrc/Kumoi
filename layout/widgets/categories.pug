@@ -1,0 +1,8 @@
+section.widget.widget-categories
+	h3= __('widget.categories')
+	- const cats = site.categories && site.categories.sort('name').toArray() || []
+	if cats.length
+		ul.cat-list
+			each c in cats
+				li
+					a(href=url_for(c.path))= `${c.name} (${c.length})`

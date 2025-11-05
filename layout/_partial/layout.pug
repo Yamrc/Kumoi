@@ -1,6 +1,16 @@
 doctype html
-html(lang=config.language)
-    head
-        != partial('_partial/head', {}, {cache: true})
-    body
-        block content
+html(lang=config.language data-theme=theme.display_mode)
+	head
+		include head
+	body(class=page.layout)
+		#body-wrap
+			include header
+			if is_home()
+				include hero
+			.container.layout
+				main#content-inner
+					block content
+				include sidebar
+			include footer
+		include rightside
+		include search-modal

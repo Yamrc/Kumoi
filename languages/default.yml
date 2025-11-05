@@ -1,0 +1,35 @@
+# Default language (English)
+
+toc:
+  title: Contents
+
+pagination:
+  prev: Previous
+  next: Next
+
+page:
+  archives:
+    title: Archives
+  categories:
+    title: Categories
+  tags:
+    title: Tags
+
+widget:
+  author: Author
+  recent_posts: Recent Posts
+  categories: Categories
+  tags: Tags
+  archives: Archives
+
+aside:
+  articles: Articles
+  tags: Tags
+  categories: Categories
+
+search:
+  title: Search
+  placeholder: Search...
+
+recommend:
+  title: Recommended

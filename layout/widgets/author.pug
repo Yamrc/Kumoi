@@ -1,0 +1,32 @@
+- const bgImg = theme.site && theme.site.author_background ? theme.site.author_background : '/img/light.jpg'
+- const bgImgDark = theme.site && theme.site.author_background_dark ? theme.site.author_background_dark : '/img/dark.jpg'
+
+section.widget.widget-author.card-info.text-center(data-bg=bgImg data-bg-dark=bgImgDark)
+	.avatar-img
+		img(src=url_for(theme.site.avatar) onerror="this.style.display='none'" alt="avatar")
+	.author-info-name= config.author || (theme.site && theme.site.title ? theme.site.title : config.title)
+	.author-info-description!= theme.site && theme.site.description ? theme.site.description : config.description
+	.site-data
+		a(href=url_for(config.archive_dir))
+			.headline= __('aside.articles')
+			.length-num= site.posts.length
+		a(href=url_for(config.tag_dir))
+			.headline= __('aside.tags')
+			.length-num= site.tags.length
+		a(href=url_for(config.category_dir))
+			.headline= __('aside.categories')
+			.length-num= site.categories.length
+	if theme.site && theme.site.button && theme.site.button.enable
+		a#card-info-btn(href=theme.site.button.link)
+			if theme.site.button.icon
+				i(class=theme.site.button.icon)
+			span= theme.site.button.text
+	if theme.site && theme.site.social
+		.card-info-social-icons
+			each url, icon in theme.site.social
+				- const [link, title, color] = (url || '').split('||').map(i => i.trim())
+				- const href = url_for(link || '#')
+				- const iconStyle = color ? `color: ${color.replace(/['"]/g, '')};` : ''
+				- const iconTitle = title || ''
+				a.social-icon(href=href target="_blank" title=iconTitle style=iconStyle)
+					i(class=icon)

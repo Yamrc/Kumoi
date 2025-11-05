@@ -1,0 +1,18 @@
+aside#sidebar
+	if theme.sidebar && theme.sidebar.enable !== false
+		each w in theme.sidebar.widgets || []
+			- const widgetConfig = typeof w === 'object' ? w : { name: w, force: false }
+			- const widgetName = widgetConfig.name || w
+			- const forceShow = widgetConfig.force === true
+			if widgetName === 'author'
+				include ../widgets/author
+			if widgetName === 'recent_posts'
+				include ../widgets/recent
+			if widgetName === 'categories'
+				include ../widgets/categories
+			if widgetName === 'tags'
+				include ../widgets/tags
+			if widgetName === 'archives'
+				include ../widgets/archives
+		if page.layout === 'post' || page.type === 'post'
+			include ../widgets/toc

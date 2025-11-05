@@ -1,2 +1,28 @@
 meta(charset="utf-8")
-meta(name="viewport", content="width=device-width, initial-scale=1")
+meta(name="viewport" content="width=device-width, initial-scale=1")
+
+//- TODO: 由页面内容决定title
+title #{config.title}
+link(rel="icon" href=theme.site && theme.site.favicon ? theme.site.favicon : "/favicon.ico")
+link(rel="stylesheet" href='/css/index.css')
+link(rel="stylesheet" href='https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css')
+script(src='https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js')
+script(src='https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js' defer)
+script(type='module' src='/js/core/lifecycle.js')
+
+//- 暂时先硬编码
+if theme.comments && theme.comments.enable && theme.comments.type === 'twikoo'
+	script(src='https://cdn.jsdelivr.net/npm/twikoo@1.6.17/dist/twikoo.all.min.js' defer)
+
+//- WOW.js其实还没有完全适配
+if theme.effects && theme.effects.wow && theme.effects.wow.enable
+	link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/animate.css@4/animate.min.css')
+	script(src='https://cdn.jsdelivr.net/npm/wowjs@1/dist/wow.min.js' defer)
+	script.
+		(function(){
+			var isDesktop = window.matchMedia && window.matchMedia('(pointer:fine)').matches
+			if (!isDesktop) return
+			window.addEventListener('DOMContentLoaded', function(){
+				if (window.WOW) new window.WOW().init()
+			})
+		})()

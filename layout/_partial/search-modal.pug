@@ -1,0 +1,13 @@
+#search-modal.hidden(role='dialog' aria-modal='true')
+	.search-backdrop
+	.search-dialog
+		.search-header
+			h3.title= __('search.title')
+			button#close-search(type='button' aria-label='Close') ✕
+		.search-body
+			input#local-search-input(type='search' placeholder=__('search.placeholder'))
+			.results#local-search-results
+script(type='module').
+	import { initSearchModal } from '/js/modules/search-modal.js'
+	import { initLocalSearch } from '/js/adapters/search/local.js'
+	initSearchModal({ onOpen: () => initLocalSearch({ input: '#local-search-input', results: '#local-search-results' }) })

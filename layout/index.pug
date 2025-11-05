@@ -1,4 +1,34 @@
 extends _partial/layout
 
 block content
-    h1 Hello world!
+	if theme.home && theme.home.recommend && theme.home.recommend.enable
+		- const rec = recommend_posts()
+		if rec && rec.length
+			section.recommend.card
+				h3= __('recommend.title')
+				ul
+					each post in rec
+						li
+							a(href=url_for(post.path))= post.title
+	.posts
+		each post in page.posts && page.posts.data || []
+			article.post
+				if post.cover
+					a.post-cover(href=url_for(post.path))
+						img(src=post.cover alt=post.title)
+				h2.post-title
+					a(href=url_for(post.path))= post.title
+				.post-meta
+					span.badge.badge-date= date(post.date, 'YYYY-MM-DD')
+					if post.categories && post.categories.length
+						- const cats = post.categories.toArray()
+						each c, i in cats
+							a.badge.badge-cat(href=url_for(c.path))= c.name
+				if post.excerpt
+					.post-excerpt!= post.excerpt
+		if page.total > 1
+			nav.pagination
+			if page.prev
+				a.prev(href=url_for(page.prev_link))= __('pagination.prev')
+			if page.next
+				a.next(href=url_for(page.next_link))= __('pagination.next')

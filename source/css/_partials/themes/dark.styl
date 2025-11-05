@@ -1,0 +1,23 @@
+[data-theme="dark"]
+	--color-bg: #0D0D0D
+	--color-surface: #121212
+	--color-text: #e5e7eb
+	--color-muted: #9ca3af
+	--color-border: #1f2937
+	--shadow-color: rgba(0, 0, 0, 0.35)
+	--shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.45)
+	--text-highlight-color: rgba(255, 255, 255, 0.9)
+	--card-info-bg: url('/img/dark.png')
+	#header
+		&.scrolled
+			background: rgba(18, 18, 18, 0.8)
+			box-shadow: 0 5px 6px -5px rgba(133, 133, 133, 0)
+		#nav-inner
+			#blog-info
+				.site-name
+					text-shadow: none
+			a.site-page,
+			span.site-page
+				text-shadow: none
+	.widget.card-info[data-bg-dark]
+		background-image: url(attr(data-bg-dark)) !important

@@ -1,0 +1,200 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body
+	margin: 0
+	background: var(--color-bg)
+	color: var(--color-text)
+	font-family: var(--font-sans)
+	font-size: var(--text-m)
+	line-height: var(--line)
+
+#body-wrap
+	display: flex
+	flex-direction: column
+	min-height: 100vh
+	&:has(#header.fixed)
+		> .container:first-of-type
+			margin-top: 60px
+
+a { color: var(--color-primary); text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container
+	max-width: var(--container)
+	margin: 0 auto
+	padding: 0 15px
+	width: 100%
+
+@media (min-width: 2000px)
+	.container { max-width: 70%; }
+@media (max-width: 768px)
+	.container { padding: 0 16px; }
+
+#header
+	position: relative
+	width: 100%
+	background: var(--color-surface)
+	box-shadow: var(--shadow-1)
+	min-height: 60px
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 0 36px
+	height: 60px
+	font-size: 1.3em
+	&.fixed
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		z-index: 90
+		background: transparent
+		box-shadow: none
+		transition: background 0.3s, box-shadow 0.3s
+	&.scrolled
+		background: rgba(255, 255, 255, 0.7)
+		backdrop-filter: blur(7px)
+		-webkit-backdrop-filter: blur(7px)
+		box-shadow: 0 5px 6px -5px rgba(133, 133, 133, 0.6)
+	#nav-inner
+		width: 1400px
+		max-width: 100%
+		display: flex
+		align-items: center
+		padding: 0 0.8rem
+		#blog-info
+			flex: 1
+			color: var(--color-text)
+			.nav-site-title
+				display: flex
+				align-items: center
+				text-decoration: none
+				color: inherit
+				.site-icon
+					margin-right: 6px
+					height: 36px
+					vertical-align: middle
+				.site-name
+					text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15)
+					font-weight: 700
+					font-size: 1.15rem
+					padding: 0 4px
+		#menus
+			.menus_items
+				display: inline
+				list-style: none
+				margin: 0
+				padding: 0
+				.menus_item
+					position: relative
+					display: inline-block
+					padding: 0 0 0 14px
+					font-size: 1.20rem
+		#nav-right
+			display: flex
+			flex-wrap: nowrap
+			flex: 1 1 auto
+			justify-content: flex-end
+			margin-left: auto
+		a.site-page,
+		span.site-page
+			position: relative
+			padding-bottom: 6px
+			text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3)
+			font-size: 0.78em
+			cursor: pointer
+			color: var(--color-text)
+			text-decoration: none
+			transition: color 0.3s ease-out
+			&:hover
+				color: var(--color-text)
+			&:not(.child):after
+				position: absolute
+				bottom: 0
+				left: 0
+				z-index: -1
+				width: 0
+				height: 3px
+				background-color: rgba(73, 177, 245, 0.6)
+				content: ''
+				transition: all 0.3s ease-in-out
+				border-radius: 2px
+			&:not(.child):hover:after
+				width: 100%
+		#open-search
+			background: none
+			border: none
+			padding: 0
+			cursor: pointer
+			font-size: inherit
+			color: inherit
+
+@media (max-width: 768px)
+	#header
+		min-height: 60px
+		padding: 0 16px
+		height: 60px
+		#nav-inner
+			padding: 0 0.8rem
+
+.hero-banner
+	margin: 15px 0
+
+.layout
+	display: flex
+	flex: 1 auto
+	margin: 0 auto
+	padding: 15px 15px 0
+	width: 100%
+	max-width: var(--container)
+	align-items: start
+	#content-inner
+		width: 100%
+		flex: 1
+	#sidebar
+		max-width: 312px
+		min-width: 300px
+		padding-left: 15px
+
+@media (min-width: 2000px)
+	.layout { max-width: 70%; }
+@media (max-width: 768px)
+	.layout { padding: 20px 16px; }
+@media (max-width: 900px)
+	.layout
+		flex-direction: column
+		#sidebar
+			order: 2
+			margin-top: 20px
+			width: 100%
+			max-width: 100%
+			min-width: auto
+			padding-left: 0
+		#content-inner
+			order: 1
+
+#footer
+	.container
+		padding: var(--space-6) 15px
+		color: var(--color-muted)
+		font-size: var(--text-s)
+
+@media (max-width: 768px)
+	#footer .container { padding: var(--space-6) 16px; }
+
+#content-inner { display: block; padding: 0; }
+
+#sidebar
+	padding: 0
+	width: 100%
+
+@media (max-width: 1024px)
+	#sidebar
+		width: 100%
+
+.card
+	background: var(--color-surface)
+	border: 1px solid var(--color-border)
+	border-radius: var(--radius-m)
+	box-shadow: var(--shadow-1)

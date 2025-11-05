@@ -1,0 +1,9 @@
+section.widget.widget-archives
+	h3= __('widget.archives')
+	- const years = {};
+	- (site.posts && site.posts.toArray() || []).forEach(p => { const y = date(p.date, 'YYYY'); years[y] = (years[y]||0)+1 })
+	if Object.keys(years).length
+		ul.arc-list
+			each cnt, y in years
+				li
+					a(href=url_for(`/archives/${y}/`))= `${y} (${cnt})`
