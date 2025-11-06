@@ -1,0 +1,22 @@
+.widget.widget-tags
+	.tag-list
+		display: flex
+		flex-wrap: wrap
+		gap: 8px 10px
+		.tag-text
+			text-decoration: none
+			color: var(--color-text)
+			position: relative
+			padding-right: 10px
+			transition: color .2s
+			&:hover { color: var(--color-primary) }
+			.name { font-size: var(--text-s) }
+			.count
+				position: absolute
+				right: 0
+				top: 0px
+				padding: 0 2px
+				color: var(--color-muted)
+				font-size: 10px
+				line-height: 1
+				text-align: center

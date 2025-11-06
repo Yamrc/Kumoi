@@ -56,22 +56,21 @@ sidebar:
 
 # Comments (only twikoo or giscus)
 comments:
-  enable: true
-  type: twikoo # twikoo | giscus
+  enable: false
+  type: # twikoo | giscus
   twikoo:
-    env_id: https://twik.api.yamr.cc/
+    env_id:
   giscus:
-    repo: ""
-    repo_id: ""
-    category: ""
-    category_id: ""
+    repo:
+    repo_id:
+    category:
+    category_id:
     mapping: pathname
     theme: auto
 
-# Search: local only (searchdb)
+# Search, required install hexo-generator-searchdb
 search:
-  enable: true
-  provider: local
+  enable: false
 
 # Analytics: disabled by default
 analytics:
