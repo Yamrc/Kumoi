@@ -1,15 +1,11 @@
-- var banner_background = theme.site && theme.site.banner ? `background: url(${url_for(theme.site.banner)}) left 10% / cover no-repeat;` : ''
+- const banner_background = theme.site && theme.site.banner ? `background: url(${url_for(theme.site.banner)}) left 10% / cover no-repeat;` : ''
+- const hasBanner = theme.site && theme.site.banner
+- const siteTitle = (theme.site && theme.site.title) ? theme.site.title : config.title
+- const siteSubtitle = theme.site && theme.site.subtitle
 
 .container
-	if theme.site && theme.site.banner
-		.hero-banner(style=banner_background)
-			.hero-inner
-				h1.site-title= (theme.site && theme.site.title) ? theme.site.title : config.title
-				if theme.site.subtitle
-					p.site-subtitle= theme.site.subtitle
-	else
-		.hero-banner.is-placeholder
-			.hero-inner
-				h1.site-title= (theme.site && theme.site.title) ? theme.site.title : config.title
-				if theme.site && theme.site.subtitle
-					p.site-subtitle= theme.site.subtitle
+	.hero-banner(class=hasBanner ? '' : 'is-placeholder' style=hasBanner ? banner_background : '')
+		.hero-inner
+			h1.site-title= siteTitle
+			if siteSubtitle
+				p.site-subtitle= siteSubtitle

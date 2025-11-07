@@ -1,24 +1,24 @@
 aside#sidebar
 	- const isPost = page.layout === 'post' || page.type === 'post'
-	- const defaultsPost = ['author','toc','recent_posts']
-	- const defaultsOther = ['author','recent_posts','categories','tags','archives']
+	- const defaultsPost = ['author', 'toc', 'recent_posts']
+	- const defaultsOther = ['author', 'recent_posts', 'categories', 'tags', 'archives']
 	- const cfgWidgets = theme.sidebar && theme.sidebar.widgets
 	- const widgets = Array.isArray(cfgWidgets) && cfgWidgets.length ? cfgWidgets : (isPost ? defaultsPost : defaultsOther)
+	- const forceAll = theme.sidebar && theme.sidebar.post_force === true
 	if theme.sidebar && theme.sidebar.enable !== false
 		each w in widgets
 			- const widgetConfig = typeof w === 'object' ? w : { name: w, force: false }
 			- const widgetName = widgetConfig.name || w
-			- const forceShow = widgetConfig.force === true
+			- const forceShow = widgetConfig.force === true || (isPost && forceAll)
 			if widgetName === 'author'
 				include ../widgets/author
-			if widgetName === 'recent_posts'
+			else if widgetName === 'recent_posts'
 				include ../widgets/recent
-			if widgetName === 'categories'
+			else if widgetName === 'categories'
 				include ../widgets/categories
-			if widgetName === 'tags'
+			else if widgetName === 'tags'
 				include ../widgets/tags
-			if widgetName === 'archives'
+			else if widgetName === 'archives'
 				include ../widgets/archives
-			if widgetName === 'toc'
-				if isPost
-					include ../widgets/toc
+			else if widgetName === 'toc' && isPost
+				include ../widgets/toc

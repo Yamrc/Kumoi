@@ -13,26 +13,5 @@ block content
 			nav#toc-mobile-nav
 				ol.toc-list
 		.post-content!= page.content
-	if theme.comments && theme.comments.enable
-		#comments
-		script#kumoi-comments-cfg(type='application/json').
-			!{JSON.stringify(theme.comments)}
-		script(type='module').
-			import { mountTwikoo } from '/js/adapters/comments/twikoo.js'
-			import { mountGiscus } from '/js/adapters/comments/giscus.js'
-			const cfgEl = document.getElementById('kumoi-comments-cfg')
-			if (!cfgEl) {
-				console.warn('[Comments] Config element not found')
-			} else {
-				try {
-					const cfg = JSON.parse(cfgEl.textContent)
-					console.log('[Comments] Config loaded:', cfg)
-					if (cfg.type === 'twikoo' && cfg.twikoo) {
-						mountTwikoo(cfg.twikoo)
-					} else if (cfg.type === 'giscus' && cfg.giscus) {
-						mountGiscus(cfg.giscus)
-					}
-				} catch(e) {
-					console.error('[Comments] Config parse error:', e)
-				}
-			}
+	include _partial/mixins/comments
+	+comments_init()

@@ -1,5 +1,5 @@
 section.widget.widget-archives
-	h3= __('widget.archives')
+	h3= __('widget.archives.title')
 	- const months = {}
 	- (site.posts && site.posts.toArray() || []).forEach(p => { const ym = date(p.date, 'YYYY-MM'); months[ym] = (months[ym]||0)+1 })
 	- const keys = Object.keys(months).sort((a,b) => b.localeCompare(a))
@@ -8,8 +8,9 @@ section.widget.widget-archives
 			each ym in keys
 				- const cnt = months[ym]
 				- const parts = ym.split('-')
-				- const label = `${parts[0]}年${parts[1]}月`
+				- const label = __('widget.archives.month_format').replace('{year}', parts[0]).replace('{month}', parts[1])
+				- const unit = __('widget.archives.unit')
 				li.arc-item
 					a.arc-box(href=url_for(`/archives/${ym}/`))
 						div.year= label
-						div.count= `${cnt} 篇`
+						div.count= cnt + unit

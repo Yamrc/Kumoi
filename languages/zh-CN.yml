@@ -23,7 +23,10 @@ widget:
   recent_posts: 最近文章
   categories: 分类
   tags: 标签
-  archives: 归档
+  archives:
+    title: 归档
+    month_format: "{year}年{month}月"
+    unit: " 篇"
 
 aside:
   articles: 文章

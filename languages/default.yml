@@ -23,7 +23,10 @@ widget:
   recent_posts: Recent Posts
   categories: Categories
   tags: Tags
-  archives: Archives
+  archives:
+    title: Archives
+    month_format: "{year}-{month}"
+    unit: " articles"
 
 aside:
   articles: Articles

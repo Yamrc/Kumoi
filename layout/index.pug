@@ -13,7 +13,7 @@ block content
 							a(href=url_for(post.path))= rtitle
 	.posts
 		include _partial/mixins/post_list
-		+postList(page.posts && page.posts.data || [])
+		+post_list(page.posts && page.posts.data || [])
 		if page.total > 1
 			nav.pagination
 			if page.prev

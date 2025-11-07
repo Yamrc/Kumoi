@@ -1,29 +1,28 @@
-mixin postList(posts)
-	.posts
-		each post, i in posts
-			- const dir = (i % 2 === 0) ? 'right' : 'left'
-			- const title = post.title || __('page.untitled')
-			- const cover = post.cover || (theme.cover && theme.cover.default)
-			article.post.zigzag(class=`cover-${dir}`)
-				a.post-cover(href=url_for(post.path))
-					if cover
-						img(src=cover alt=title)
-					else
-						.div.cover-placeholder
-				.post-info
-					h2.post-title
-						a(href=url_for(post.path))= title
-					.div.post-meta-line
-						span.meta-item= __('page.published_at') + ' ' + date(post.date, 'YYYY-MM-DD')
-						if post.categories && post.categories.length
-							span.meta-sep |
-							- const catFirst = post.categories.toArray()[0]
-							a.meta-item(href=url_for(catFirst.path))= catFirst.name
-						if theme.comments && theme.comments.enable && theme.comments.type === 'twikoo'
-							span.meta-sep |
-							span.meta-item
-								a.twikoo-count(href=url_for(post.path) + '#comments' data-path=url_for(post.path)) 0
-								|  #{__('page.comments')}
-					if post.excerpt
-						.post-excerpt!= post.excerpt
+mixin post_list(posts)
+	each post, i in posts
+		- const dir = (i % 2 === 0) ? 'right' : 'left'
+		- const title = post.title || __('page.untitled')
+		- const cover = post.cover || (theme.cover && theme.cover.default)
+		article.post.zigzag(class=`cover-${dir}`)
+			a.post-cover(href=url_for(post.path))
+				if cover
+					img(src=cover alt=title)
+				else
+					.div.cover-placeholder
+			.post-info
+				h2.post-title
+					a(href=url_for(post.path))= title
+				.div.post-meta-line
+					span.meta-item= __('page.published_at') + ' ' + date(post.date, 'YYYY-MM-DD')
+					if post.categories && post.categories.length
+						span.meta-sep |
+						- const catFirst = post.categories.toArray()[0]
+						a.meta-item(href=url_for(catFirst.path))= catFirst.name
+					if theme.comments && theme.comments.enable && theme.comments.type === 'twikoo'
+						span.meta-sep |
+						span.meta-item
+							a.twikoo-count(href=url_for(post.path) + '#comments' data-path=url_for(post.path)) 0
+							|  #{__('page.comments')}
+				if post.excerpt
+					.post-excerpt!= post.excerpt
 
