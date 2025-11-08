@@ -1,0 +1,8 @@
+mixin comments_init
+	if theme.comments && theme.comments.enable
+		section#comments
+			//- Giscus这一段暂时无效
+			if theme.comments.type === 'giscus'
+				script(type='module').
+					import { mountGiscus } from '/js/adapters/comments/giscus.js'
+					mountGiscus(!{JSON.stringify(theme.comments.giscus || {})})
