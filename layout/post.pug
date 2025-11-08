@@ -2,13 +2,14 @@ extends _partial/layout
 
 block content
 	article.post-full
-		h1.post-title= page.title
-		.post-meta
-			span.date= date(page.date, 'YYYY-MM-DD')
-			if page.categories && page.categories.length
-				span.sep •
-				each c in page.categories.toArray()
-					a.category(href=url_for(c.path))= c.name
+		//- TODO: 实现页头，专门存放meta信息
+		//- h1.post-title= page.title
+		//- .post-meta
+		//- 	span.date= date(page.date, 'YYYY-MM-DD')
+		//- 	if page.categories && page.categories.length
+		//- 		span.sep •
+		//- 		each c in page.categories.toArray()
+		//- 			a.category(href=url_for(c.path))= c.name
 		#toc-mobile
 			nav#toc-mobile-nav
 				ol.toc-list
