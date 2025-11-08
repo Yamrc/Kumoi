@@ -1,5 +1,4 @@
 .posts
-	display: block
 	.post { margin-bottom: var(--space-6); }
 
 .pagination
@@ -29,7 +28,6 @@ article.post
 		gap: 0
 		align-items: stretch
 		padding: 0
-		overflow: hidden
 		.post-cover { width: 42%; min-width: 0; height: 240px }
 		.post-info { width: 58%; min-width: 0; padding: 0 40px; display: flex; flex-direction: column; justify-content: center }
 		&.cover-right .post-cover { order: 2 }
@@ -94,8 +92,6 @@ article.post
 
 .hero-banner
 	height: 400px
-	background-size: cover
-	background-position: center
 	border-radius: var(--radius-m)
 	overflow: hidden
 	box-shadow: var(--shadow-1)

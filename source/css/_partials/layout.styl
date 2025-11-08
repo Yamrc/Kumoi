@@ -54,8 +54,8 @@ img { max-width: 100%; display: block; }
 		transition: background 0.3s, box-shadow 0.3s
 	&.scrolled
 		background: rgba(255, 255, 255, 0.7)
-		backdrop-filter: blur(7px)
 		-webkit-backdrop-filter: blur(7px)
+		backdrop-filter: blur(7px)
 		box-shadow: 0 5px 6px -5px rgba(133, 133, 133, 0.6)
 	#nav-inner
 		width: 1400px
@@ -144,10 +144,7 @@ img { max-width: 100%; display: block; }
 .layout
 	display: flex
 	flex: 1 auto
-	margin: 0 auto
-	padding: 15px 15px 0
-	width: 100%
-	max-width: var(--container)
+	padding: 9px 15px 0
 	align-items: start
 	#content-inner
 		width: 100%
@@ -200,9 +197,3 @@ img { max-width: 100%; display: block; }
 @media (max-width: 1024px)
 	#sidebar
 		width: 100%
-
-.card
-	background: var(--color-surface)
-	border: 1px solid var(--color-border)
-	border-radius: var(--radius-m)
-	box-shadow: var(--shadow-1)

@@ -4,7 +4,7 @@ block content
 	if theme.home && theme.home.recommend && theme.home.recommend.enable
 		- const rec = recommend_posts()
 		if rec && rec.length
-			section.recommend.card
+			section.recommend
 				h3= __('recommend.title')
 				ul
 					each post in rec
