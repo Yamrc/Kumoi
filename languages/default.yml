@@ -36,6 +36,7 @@ aside:
 search:
   title: Search
   placeholder: Search...
+  stats: ${count} articles found
 
 recommend:
   title: Recommended

@@ -36,6 +36,7 @@ aside:
 search:
   title: 搜索
   placeholder: 搜索...
+  stats: 共找到${count}篇文章
 
 recommend:
   title: 推荐阅读
