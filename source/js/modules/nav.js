@@ -8,9 +8,9 @@ export function initNav() {
 		const scroll = window.scrollY || document.documentElement.scrollTop
 		if (scroll > threshold) {
 			header.classList.add('scrolled')
-		} else {
-			header.classList.remove('scrolled')
+			return
 		}
+		header.classList.remove('scrolled')
 	}
 
 	updateHeader()

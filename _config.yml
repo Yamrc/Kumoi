@@ -60,13 +60,16 @@ comments:
   type: # twikoo | giscus
   twikoo:
     env_id:
+  # https://giscus.app
   giscus:
     repo:
     repo_id:
     category:
     category_id:
+    reactions_enabled: true
     mapping: pathname
-    theme: auto
+    theme:
+    language: zh-CN
 
 # Search, required install hexo-generator-searchdb
 search:
