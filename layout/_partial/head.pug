@@ -2,7 +2,13 @@ meta(charset="utf-8")
 meta(name="viewport" content="width=device-width, initial-scale=1")
 //- TODO: 由页面内容决定title
 title #{config.title}
+
 link(rel="icon" href=theme.site && theme.site.favicon ? theme.site.favicon : "/favicon.ico")
+script.
+	(function() {
+		const savedTheme = localStorage.getItem('theme')
+		if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme)
+	})()
 link(rel="stylesheet" href='/css/index.css')
 script(type='module' src='/js/core/lifecycle.js')
 

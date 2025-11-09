@@ -5,7 +5,16 @@ import { initLightbox } from '../modules/lightbox.js'
 import { initRightSide, initAuthorBackground, updateAuthorBackground } from '../modules/rightside.js'
 import { initNav } from '../modules/nav.js'
 
+function initTheme() {
+	const savedTheme = localStorage.getItem('theme')
+	if (savedTheme === 'dark' || savedTheme === 'light') {
+		document.documentElement.setAttribute('data-theme', savedTheme)
+		updateAuthorBackground(savedTheme)
+	}
+}
+
 export function init() {
+	initTheme()
 	initCode()
 	initTOC()
 	initLazyload()

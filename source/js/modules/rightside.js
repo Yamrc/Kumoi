@@ -20,6 +20,7 @@ function toggleTheme() {
 	if (window.onThemeChange) {
 		window.onThemeChange(next)
 	}
+	localStorage.setItem('theme', next)
 }
 
 export function updateAuthorBackground(theme) {
