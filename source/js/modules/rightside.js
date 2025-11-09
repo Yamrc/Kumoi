@@ -17,6 +17,9 @@ function toggleTheme() {
 	const next = now === 'dark' ? 'light' : 'dark'
 	el.setAttribute('data-theme', next)
 	updateAuthorBackground(next)
+	if (window.onThemeChange) {
+		window.onThemeChange(next)
+	}
 }
 
 export function updateAuthorBackground(theme) {
