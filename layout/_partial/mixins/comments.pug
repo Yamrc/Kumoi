@@ -1,7 +1,8 @@
 mixin comments_init
-	if theme.comments && theme.comments.enable
+	if theme.plugins && theme.plugins.comments && theme.plugins.comments.provider
 		section#comments
-			if theme.comments.type === 'giscus'
+			if theme.plugins.comments.provider === 'giscus'
+				//- 由于giscus暂时没有实现listcount，所以只在这里引入
 				script(type='module').
 					import { mountGiscus } from '/js/adapters/comments/giscus.js'
-					mountGiscus(!{JSON.stringify(theme.comments.giscus || {})})
+					mountGiscus(!{JSON.stringify(theme.plugins.comments.giscus || {})})

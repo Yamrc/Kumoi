@@ -1,102 +1,88 @@
-# Site brand & basic
+# Theme docs: https://github.com/Yamrc/Kumoi/wiki
+
 site:
-  title: Kumoi
-  subtitle: ""
-  description: ""
-  logo:
   favicon: /favicon.ico
-  banner: https://api.dujin.org/bing/1920.php # e.g. /images/banner.jpg
   avatar: /img/avatar.jpg
-  # Author card background (optional, leave empty to use default)
-  author_background:
-  author_background_dark:
-  # Author widget button (optional)
-  button:
-    enable: false
-    icon: fab fa-github # Font Awesome icon class
-    text: Follow Me
-    link: https://github.com/yourusername
-  # Social icons (optional)
-  # Format: icon: "link||title||color"
-  # Example: "fab fa-github": "https://github.com/user||GitHub||#333"
-  social:
-    # "fab fa-github": "https://github.com/user||GitHub||#333"
-    # "fab fa-twitter": "https://twitter.com/user||Twitter||#1DA1F2"
 
-# Header
-header:
-  fixed: true # Enable fixed header with glassmorphism effect
-
-# Navigation (simple example)
-nav:
-  - text: 首页
-    link: /
-  - text: 归档
-    link: /archives/
-
-cover:
-  default: https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
-
-# Appearance
 appearance:
-  theme_color: "#3b82f6" # primary
-  rounded: true
-  dark_mode: auto # auto | light | dark
+  header:
+    logo:
+    nav:
+      # - title: Home
+      #   url: /
+      # - title: Archives
+      #   url: /archives/
+    fixed: true
+    banner_background:
+  post:
+    default_cover: https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
+  effect:
+    wowjs: false # TODO :D
+  theme:
+    dark_mode: auto # TODO: D
 
-# Sidebar widgets (minimal set)
-sidebar:
-  enable: true
-  widgets:
-    - author
-    - toc # only in post pages
-    - recent_posts
-    - categories
-    - tags
-    - archives
-
-# Comments (only twikoo or giscus)
-comments:
-  enable: false
-  type: # twikoo | giscus
-  twikoo:
-    env_id:
-  # https://giscus.app
-  giscus:
-    repo:
-    repo_id:
-    category:
-    category_id:
-    reactions_enabled: true
-    mapping: pathname
-    theme:
-    language: zh-CN
-
-# Search, required install hexo-generator-searchdb
-search:
-  enable: false
-
-# Analytics: disabled by default
-analytics:
-  enable: false
-  provider: none # cloudflare | umami | none
-  cloudflare:
-    token: ""
-  umami:
-    src: ""
-    website_id: ""
-
-# PJAX: optional, default off
-pjax:
-  enable: false
-
-# Optional effects
-effects:
-  wow:
-    enable: true # default off; desktop-only when enabled
-
-# Home recommendation (build-time selection)
-home:
-  recommend:
+components:
+  sidebar:
     enable: true
-    count: 3 # number of posts to show
-    mode: pin_first # pin_first | random
+    # widgets order and visibility:
+    # - accepted values: author | toc | recent_posts | categories | tags | archives
+    # - render order follows this list; unknown names are ignored
+    # - "toc" only appears on post pages
+    # - supports either:
+    #   - simple form: ["author", "toc", ...]
+    #   - object form: [{ name: "toc" }, { name: "recent_posts" }]
+    widgets:
+      - author
+      - toc
+      - recent_posts
+      - categories
+      - tags
+      - archives
+    recent_limit: 3
+  author:
+    background:
+      light: /img/light.jpg
+      dark: /img/dark.jpg
+    social:
+      # Font Awesome format: "link||title||color"
+      # example:
+      #
+      # "fab fa-github": "https://github.com/user||GitHub||#333"
+      # "fab fa-twitter": "https://twitter.com/user||Twitter||#1DA1F2"
+    author_button:
+      enabled: false
+      icon: fab fa-github
+      text: Follow me
+      url: https://github.com/user
+
+plugins:
+  # Search: requires hexo-generator-searchdb
+  search: false
+  comments:
+    # Comments: choose one of twikoo | giscus
+    # Docs: Twikoo https://twikoo.js.org/ · Giscus https://giscus.app
+    provider: # twikoo | giscus
+    twikoo:
+      # Backend URL
+      env_id:
+    giscus:
+      # Generate the following at https://giscus.app and paste here
+      repo:
+      repo_id:
+      category:
+      category_id:
+      reactions_enabled: true
+      mapping: pathname
+      language: zh-CN # leave empty to fallback to Hexo config
+  pjax:
+    # PJAX: disable if third-party scripts break
+    enable: true
+  analytics:
+    # Analytics: cloudflare | umami (or leave empty to disable)
+    provider: # cloudflare | umami
+    cloudflare:
+      token:
+    umami:
+      # Docs: https://umami.is/docs
+      site_id:
+      server_url:

@@ -4,7 +4,7 @@ mixin articleSort(posts)
         - posts.forEach(article => {
             - const y = date(article.date, 'YYYY')
             - const title = article.title || __('page.untitled')
-            - const coverUrl = article.cover || (theme.cover && theme.cover.default)
+            - const coverUrl = article.cover || (theme.appearance && theme.appearance.post && theme.appearance.post.default_cover)
             if y !== year
                 - year = y
                 .article-sort-item.year= year

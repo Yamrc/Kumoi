@@ -1,6 +1,6 @@
 section.widget.widget-recent
 	h3= __('widget.recent_posts')
-	- const recentLimit = (theme.sidebar && theme.sidebar.recent_limit) || 3
+	- const recentLimit = (theme.components && theme.components.sidebar && theme.components.sidebar.recent_limit) || 3
 	- const list = site.posts && site.posts.sort('date', -1).limit(recentLimit).toArray() || []
 	if list.length
 		ul.recent-list

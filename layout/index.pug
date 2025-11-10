@@ -1,16 +1,17 @@
 extends _partial/layout
 
 block content
-	if theme.home && theme.home.recommend && theme.home.recommend.enable
-		- const rec = recommend_posts()
-		if rec && rec.length
-			section.recommend
-				h3= __('recommend.title')
-				ul
-					each post in rec
-						li
-							- const rtitle = post.title || __('page.untitled')
-							a(href=url_for(post.path))= rtitle
+	//- TODO
+	//- if theme.home && theme.home.recommend && theme.home.recommend.enable
+	//- 	- const rec = recommend_posts()
+	//- 	if rec && rec.length
+	//- 		section.recommend
+	//- 			h3= __('recommend.title')
+	//- 			ul
+	//- 				each post in rec
+	//- 					li
+	//- 						- const rtitle = post.title || __('page.untitled')
+	//- 						a(href=url_for(post.path))= rtitle
 	.posts
 		include _partial/mixins/post_list
 		+post_list(page.posts && page.posts.data || [])

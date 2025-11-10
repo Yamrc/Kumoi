@@ -2,7 +2,7 @@ mixin post_list(posts)
 	each post, i in posts
 		- const dir = (i % 2 === 0) ? 'right' : 'left'
 		- const title = post.title || __('page.untitled')
-		- const cover = post.cover || (theme.cover && theme.cover.default)
+		- const cover = post.cover || (theme.appearance && theme.appearance.post && theme.appearance.post.default_cover)
 		article.post.zigzag(class=`cover-${dir}`)
 			a.post-cover(href=url_for(post.path))
 				if cover
@@ -18,7 +18,8 @@ mixin post_list(posts)
 						span.meta-sep |
 						- const catFirst = post.categories.toArray()[0]
 						a.meta-item(href=url_for(catFirst.path))= catFirst.name
-					if theme.comments && theme.comments.enable && theme.comments.type === 'twikoo'
+					//- TODO: support giscus
+					if theme.plugins && theme.plugins.comments && theme.plugins.comments.provider === 'twikoo'
 						span.meta-sep |
 						span.meta-item
 							a.twikoo-count(href=url_for(post.path) + '#comments' data-path=url_for(post.path)) 0

@@ -1,15 +1,16 @@
-header#header(class=theme.header && theme.header.fixed ? 'fixed' : '')
+header#header(class=theme.appearance && theme.appearance.header && theme.appearance.header.fixed ? 'fixed' : '')
 	#nav-inner
 		#blog-info
 			a.nav-site-title(href=config.url || '/')
-				if theme.site && theme.site.logo
-					img.site-icon(src=url_for(theme.site.logo) alt='Logo')
-				span.site-name= (theme.site && theme.site.title) ? theme.site.title : config.title
+				if theme.appearance && theme.appearance.header && theme.appearance.header.logo
+					img.site-icon(src=url_for(theme.appearance.header.logo) alt='Logo')
+				span.site-name= config.title
 		nav#menus
 			ul.menus_items
-				each item in theme.nav || []
+				each item in (theme.appearance && theme.appearance.header && theme.appearance.header.nav) || []
 					li.menus_item
-						a.site-page(href=item.link)= item.text
+						a.site-page(href=item.url)= item.title
 		#nav-right
-			button#open-search(type='button' aria-controls='search-modal' aria-label='Search')
-				span.site-page.social-icon.search 🔍
+			if theme.plugins && theme.plugins.search
+				button#open-search(type='button' aria-controls='search-modal' aria-label='Search')
+					span.site-page.social-icon.search 🔍

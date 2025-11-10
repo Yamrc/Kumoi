@@ -1,11 +1,13 @@
-- const bgImg = theme.site && theme.site.author_background ? theme.site.author_background : '/img/light.jpg'
-- const bgImgDark = theme.site && theme.site.author_background_dark ? theme.site.author_background_dark : '/img/dark.jpg'
+- const bgRaw = theme.components && theme.components.author && theme.components.author.background && theme.components.author.background.light
+- const bgDarkRaw = theme.components && theme.components.author && theme.components.author.background && theme.components.author.background.dark
+- const bgImg = (bgRaw && String(bgRaw).trim()) || undefined
+- const bgImgDark = (bgDarkRaw && String(bgDarkRaw).trim()) || undefined
 
 section.widget.widget-author.card-info.text-center(data-bg=bgImg data-bg-dark=bgImgDark)
 	.avatar-img
-		img(src=url_for(theme.site.avatar) onerror="this.style.display='none'" alt="avatar")
-	.author-info-name= config.author || (theme.site && theme.site.title ? theme.site.title : config.title)
-	.author-info-description!= theme.site && theme.site.description ? theme.site.description : config.description
+		img(src=url_for(theme.site && theme.site.avatar) onerror="this.style.display='none'" alt="avatar")
+	.author-info-name= config.author || config.title
+	.author-info-description!= config.description
 	.site-data
 		a(href=url_for(config.archive_dir))
 			.headline= __('aside.articles')
@@ -16,17 +18,33 @@ section.widget.widget-author.card-info.text-center(data-bg=bgImg data-bg-dark=bg
 		a(href=url_for(config.category_dir))
 			.headline= __('aside.categories')
 			.length-num= site.categories.length
-	if theme.site && theme.site.button && theme.site.button.enable
-		a#card-info-btn(href=theme.site.button.link)
-			if theme.site.button.icon
-				i(class=theme.site.button.icon)
-			span= theme.site.button.text
-	if theme.site && theme.site.social
+	if theme.components && theme.components.author && theme.components.author.author_button && theme.components.author.author_button.enabled
+		a#card-info-btn(href=theme.components.author.author_button.url)
+			if theme.components.author.author_button.icon
+				i(class=theme.components.author.author_button.icon)
+			span= theme.components.author.author_button.text
+	if theme.components && theme.components.author && theme.components.author.social
 		.card-info-social-icons
-			each url, icon in theme.site.social
+			each url, icon in theme.components.author.social
 				- const [link, title, color] = (url || '').split('||').map(i => i.trim())
 				- const href = url_for(link || '#')
 				- const iconStyle = color ? `color: ${color.replace(/['"]/g, '')};` : ''
 				- const iconTitle = title || ''
 				a.social-icon(href=href target="_blank" title=iconTitle style=iconStyle)
 					i(class=icon)
+script.
+	(function(){
+		var el = document.querySelector('section.widget.widget-author.card-info');
+		if (!el) return;
+		function apply() {
+			var mode = document.documentElement.getAttribute('data-theme') || 'light';
+			var url = mode === 'dark' ? el.getAttribute('data-bg-dark') : el.getAttribute('data-bg');
+			el.style.backgroundImage = url ? ('url(' + url + ')') : '';
+		}
+		apply();
+		var prev = window.onThemeChange;
+		window.onThemeChange = function(mode){
+			if (typeof prev === 'function') prev(mode);
+			apply();
+		};
+	})();

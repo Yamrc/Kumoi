@@ -1,11 +1,9 @@
-- const banner_background = theme.site && theme.site.banner ? `background: url(${url_for(theme.site.banner)}) left 10% / cover no-repeat;` : ''
-- const hasBanner = theme.site && theme.site.banner
-- const siteTitle = (theme.site && theme.site.title) ? theme.site.title : config.title
-- const siteSubtitle = theme.site && theme.site.subtitle
+- const bannerUrl = theme.appearance && theme.appearance.header && theme.appearance.header.banner_background
+- const banner_background = bannerUrl ? `background: url(${url_for(bannerUrl)}) left 10% / cover no-repeat;` : ''
+- const hasBanner = !!bannerUrl
 
 .container
 	.hero-banner(class=hasBanner ? '' : 'is-placeholder' style=hasBanner ? banner_background : '')
 		.hero-inner
-			h1.site-title= siteTitle
-			if siteSubtitle
-				p.site-subtitle= siteSubtitle
+			h1.site-title= config.title
+			p.site-subtitle= config.subtitle
