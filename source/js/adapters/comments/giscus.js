@@ -33,11 +33,7 @@ export function mountGiscus(config) {
 	s.setAttribute('data-loading', 'lazy')
 	el.appendChild(s)
 
-	const originalThemeChange = window.onThemeChange
-	window.onThemeChange = (mode) => {
-		originalThemeChange?.(mode)
-		updateTheme()
-	}
+	window.addEventListener('themechange', updateTheme)
 
 	new MutationObserver(updateTheme).observe(document.documentElement, {
 		attributes: true,

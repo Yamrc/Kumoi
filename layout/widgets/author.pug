@@ -45,8 +45,8 @@ script.
 		var el = document.querySelector('section.widget.widget-author.card-info');
 		if (!el) return;
 		var links = el.querySelectorAll('.card-info-social-icons a.social-icon');
-		function apply() {
-			var mode = document.documentElement.getAttribute('data-theme') || 'light';
+		function apply(mode) {
+			mode = mode || (document.documentElement.getAttribute('data-theme') || 'light');
 			var url = mode === 'dark' ? el.getAttribute('data-bg-dark') : el.getAttribute('data-bg');
 			el.style.backgroundImage = url ? ('url(' + url + ')') : '';
 			links.forEach(function(a){
@@ -57,9 +57,7 @@ script.
 			});
 		}
 		apply();
-		var prev = window.onThemeChange;
-		window.onThemeChange = function(mode){
-			if (typeof prev === 'function') prev(mode);
-			apply();
-		};
+		window.addEventListener('themechange', function(e){
+			apply(e && e.detail && e.detail.mode);
+		});
 	})();

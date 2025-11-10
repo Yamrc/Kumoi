@@ -1,4 +1,5 @@
-// TODO: 重构sidebar
+import { Theme } from '../core/theme.js'
+
 export function initRightSide() {
 	const root = document.getElementById('rightside')
 	if (!root) return
@@ -10,7 +11,7 @@ export function initRightSide() {
 				window.scrollTo({ top: 0, behavior: 'smooth' })
 				break
 			case 'toggle-theme':
-				toggleTheme()
+				Theme.toggle()
 				break
 			case 'toggle-toc':
 				toggleTOC()
@@ -20,16 +21,6 @@ export function initRightSide() {
 	window.addEventListener('resize', () => {
 		if (isDesktop()) toggleTOC(false)
 	})
-}
-
-function toggleTheme() {
-	const el = document.documentElement
-	const now = el.getAttribute('data-theme') || 'light'
-	const next = now === 'dark' ? 'light' : 'dark'
-	el.setAttribute('data-theme', next)
-	updateAuthorBackground(next)
-	if (window.onThemeChange) window.onThemeChange(next)
-	localStorage.setItem('theme', next)
 }
 
 const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches
@@ -75,13 +66,7 @@ export function updateAuthorBackground(theme) {
 export function initAuthorBackground() {
 	const theme = document.documentElement.getAttribute('data-theme') || 'light'
 	updateAuthorBackground(theme)
-	const observer = new MutationObserver(mutations => {
-		mutations.forEach(mutation => {
-			if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-				const next = document.documentElement.getAttribute('data-theme') || 'light'
-				updateAuthorBackground(next)
-			}
-		})
+	window.addEventListener('themechange', e => {
+		updateAuthorBackground((e && e.detail && e.detail.mode) || Theme.get())
 	})
-	observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
 }
