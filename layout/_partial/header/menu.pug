@@ -1,0 +1,26 @@
+nav#menus
+    ul.menus_items
+        - const nav = (theme.appearance && theme.appearance.header && theme.appearance.header.nav) || []
+        each item in nav
+            - const children = Array.isArray(item && item.items) ? item.items : null
+            li.menus_item(class=children && children.length ? 'has-children' : '')
+                if children && children.length
+                    span.site-page
+                        if item.icon
+                            i(class=item.icon)
+                        |&nbsp;
+                        = item.title
+                    ul.submenu
+                        each sub in children
+                            li
+                                a.site-page.child(href=sub.url)
+                                    if sub.icon
+                                        i(class=sub.icon)
+                                    |&nbsp;
+                                    = sub.title
+                else
+                    a.site-page(href=item.url)
+                        if item.icon
+                            i(class=item.icon)
+                        |&nbsp;
+                        = item.title

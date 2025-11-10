@@ -23,23 +23,38 @@ section.widget.widget-author.card-info.text-center(data-bg=bgImg data-bg-dark=bg
 			if theme.components.author.author_button.icon
 				i(class=theme.components.author.author_button.icon)
 			span= theme.components.author.author_button.text
-	if theme.components && theme.components.author && theme.components.author.social
+	if theme.components && theme.components.author && Array.isArray(theme.components.author.social)
+		- const social = theme.components.author.social.filter(s => s && s.icon && s.url)
 		.card-info-social-icons
-			each url, icon in theme.components.author.social
-				- const [link, title, color] = (url || '').split('||').map(i => i.trim())
-				- const href = url_for(link || '#')
-				- const iconStyle = color ? `color: ${color.replace(/['"]/g, '')};` : ''
-				- const iconTitle = title || ''
-				a.social-icon(href=href target="_blank" title=iconTitle style=iconStyle)
-					i(class=icon)
+			each s in social
+				- const colorRaw = (s.color && String(s.color).replace(/['"]/g, '')) || ''
+				- const pair = colorRaw.split(',').map(i => i.trim())
+				- const colorLight = pair[0] || ''
+				- const colorDark = pair[1] || ''
+				a.social-icon(
+					href=url_for(s.url)
+					target="_blank"
+					title=(s.title || '')
+					style=(colorLight ? `color: ${colorLight};` : '')
+					data-color=colorLight
+					data-color-dark=colorDark
+				)
+					i(class=s.icon)
 script.
 	(function(){
 		var el = document.querySelector('section.widget.widget-author.card-info');
 		if (!el) return;
+		var links = el.querySelectorAll('.card-info-social-icons a.social-icon');
 		function apply() {
 			var mode = document.documentElement.getAttribute('data-theme') || 'light';
 			var url = mode === 'dark' ? el.getAttribute('data-bg-dark') : el.getAttribute('data-bg');
 			el.style.backgroundImage = url ? ('url(' + url + ')') : '';
+			links.forEach(function(a){
+				var cl = a.dataset.color || '';
+				var cd = a.dataset.colorDark || '';
+				var chosen = mode === 'dark' ? (cd || cl) : (cl || cd);
+				a.style.color = chosen || '';
+			});
 		}
 		apply();
 		var prev = window.onThemeChange;

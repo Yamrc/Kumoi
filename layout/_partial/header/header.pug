@@ -5,11 +5,7 @@ header#header(class=theme.appearance && theme.appearance.header && theme.appeara
 				if theme.appearance && theme.appearance.header && theme.appearance.header.logo
 					img.site-icon(src=url_for(theme.appearance.header.logo) alt='Logo')
 				span.site-name= config.title
-		nav#menus
-			ul.menus_items
-				each item in (theme.appearance && theme.appearance.header && theme.appearance.header.nav) || []
-					li.menus_item
-						a.site-page(href=item.url)= item.title
+		include menu
 		#nav-right
 			if theme.plugins && theme.plugins.search
 				button#open-search(type='button' aria-controls='search-modal' aria-label='Search')

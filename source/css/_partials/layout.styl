@@ -90,37 +90,67 @@ img { max-width: 100%; display: block; }
 					display: inline-block
 					padding: 0 0 0 14px
 					font-size: 1.20rem
+					a.site-page,
+					span.site-page
+						position: relative
+						padding-bottom: 6px
+						text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3)
+						font-size: 0.78em
+						cursor: pointer
+						color: var(--color-text)
+						text-decoration: none
+						transition: color 0.3s ease-out
+						&:hover
+							color: var(--color-text)
+						&:not(.child):after
+							position: absolute
+							bottom: 0
+							left: 0
+							z-index: -1
+							width: 0
+							height: 3px
+							background-color: var(--color-primary)
+							content: ''
+							transition: all 0.3s ease-in-out
+							border-radius: 2px
+						&:not(.child):hover:after
+							width: 100%
+					&.has-children:hover
+						> a.site-page:not(.child):after,
+						> span.site-page:not(.child):after
+							width: 100%
+					.submenu
+						position: absolute
+						top: 100%
+						left: 0
+						min-width: 80px
+						padding: 6px 0
+						list-style: none
+						box-shadow: var(--shadow-1)
+						background: var(--color-surface)
+						border-radius: var(--radius-s)
+						opacity: 0
+						transform-origin: top center
+						transform: translateY(-2px) scaleY(.96)
+						pointer-events: none
+						transition: opacity .18s cubic-bezier(.2,.8,.2,1), transform .22s cubic-bezier(.2,.8,.2,1)
+						li a.site-page
+							display: block
+							padding: 6px 12px
+							white-space: nowrap
+							font-size: .7em
+							line-height: 1.2
+							&:hover { color: var(--color-primary) }
+					&.has-children:hover .submenu
+						opacity: 1
+						transform: translateY(0) scaleY(1)
+						pointer-events: auto
 		#nav-right
 			display: flex
 			flex-wrap: nowrap
 			flex: 1 1 auto
 			justify-content: flex-end
 			margin-left: auto
-		a.site-page,
-		span.site-page
-			position: relative
-			padding-bottom: 6px
-			text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3)
-			font-size: 0.78em
-			cursor: pointer
-			color: var(--color-text)
-			text-decoration: none
-			transition: color 0.3s ease-out
-			&:hover
-				color: var(--color-text)
-			&:not(.child):after
-				position: absolute
-				bottom: 0
-				left: 0
-				z-index: -1
-				width: 0
-				height: 3px
-				background-color: rgba(73, 177, 245, 0.6)
-				content: ''
-				transition: all 0.3s ease-in-out
-				border-radius: 2px
-			&:not(.child):hover:after
-				width: 100%
 		#open-search
 			background: none
 			border: none

@@ -8,10 +8,18 @@ appearance:
   header:
     logo:
     nav:
-      # - title: Home
-      #   url: /
-      # - title: Archives
-      #   url: /archives/
+      # Notes:
+      # - Each item supports either:
+      #   1) link item: { "icon": "...", "title": "...", "url": "/path" }
+      #   2) submenu:   { "icon": "...", "title": "...", "items": [ { ...link }, ... ] }
+      # - Only two levels are supported (main + submenu). Deeper nesting is ignored.
+      # Examples:
+      #
+      # - { "icon": "fas fa-home", "title": "Home", "url": "/" }
+      # - { "icon": "fas fa-bars", "title": "List", "items": [
+      #         { "icon": "fas fa-tags", "title": "Tags", "url": "/tags" },
+      #         { "icon": "fas fa-folder", "title": "Categories", "url": "/categories", },
+      #   ]}
     fixed: true
     banner_background:
   post:
@@ -44,11 +52,16 @@ components:
       light: /img/light.jpg
       dark: /img/dark.jpg
     social:
-      # Font Awesome format: "link||title||color"
-      # example:
+      # Notes:
+      # - color supports a dual-value format: "light,dark"
+      #   · when current theme is dark, use the second value; if missing, fallback to the first
+      #   · when current theme is light, use the first value.
+      # - items must be array objects: [{ icon, title?, url, color? }]
+      # #Examples:
       #
-      # "fab fa-github": "https://github.com/user||GitHub||#333"
-      # "fab fa-twitter": "https://twitter.com/user||Twitter||#1DA1F2"
+      # - { "icon":"fab fa-github", "title":"GitHub", "url":"https://github.com/user", "color":"#333,#fff" }
+      # - { "icon":"fab fa-twitter", "title":"Twitter", "url":"https://twitter.com/user", "color":"#333,#fff" }
+      # - { "icon":"fas fa-envelope", "title":"Email", "url":"mailto:user@example.com", "color":"#333,#fff" }
     author_button:
       enabled: false
       icon: fab fa-github
