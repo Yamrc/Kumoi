@@ -41,9 +41,9 @@ export function init() {
             ﾚ'ヽL__|___i,___,ンﾚ|ノ
                 ﾄ-,/  |___./
                 'ｰ'    !_,.:
-%cHello from Kumoi %c ${window.THEME_VERSION}`,
-	"padding: 2px 6px; border-radius: 3px 0 0 3px; color: #fff; background: #FF6699; font-weight: bold;",
-	"padding: 2px 6px; border-radius: 0 3px 3px 0; color: #fff; background: #FF9999; font-weight: bold;")
+%cHello from Kumoi%c${window.THEME_VERSION}`,
+	"padding:2px 6px;border-radius:3px 0 0 3px;color:#fff;background:#FF6699;font-weight: bold;",
+	"padding:2px 6px;border-radius:0 3px 3px 0;color:#fff;background:#FF9999;font-weight: bold;")
 }
 
 export function onThemeChange(mode) {

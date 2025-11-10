@@ -1,9 +1,10 @@
-#search-modal.hidden(role='dialog' aria-modal='true')
-	.search-backdrop
+#search-modal.hidden(role='dialog' aria-modal='true' aria-hidden='true')
+	.search-backdrop(data-search-close)
 	.search-dialog
 		.search-header
 			h3.title= __('search.title')
-			button#close-search(type='button' aria-label='Close') ✕
+			button#close-search.search-close(type='button' aria-label='Close' data-search-close)
+				i.fas.fa-times
 		.search-body
 			input#local-search-input(type='search' placeholder=__('search.placeholder'))
 			.results#local-search-results

@@ -1,13 +1,24 @@
+// TODO: 重构sidebar
 export function initRightSide() {
 	const root = document.getElementById('rightside')
 	if (!root) return
 	root.addEventListener('click', e => {
 		const target = e.target.closest('[data-action]')
 		if (!target) return
-		const action = target.getAttribute('data-action')
-		if (action === 'go-top') window.scrollTo({ top: 0, behavior: 'smooth' })
-		if (action === 'toggle-theme') toggleTheme()
-		if (action === 'toggle-toc') toggleTOC()
+		switch (target.getAttribute('data-action')) {
+			case 'go-top':
+				window.scrollTo({ top: 0, behavior: 'smooth' })
+				break
+			case 'toggle-theme':
+				toggleTheme()
+				break
+			case 'toggle-toc':
+				toggleTOC()
+				break
+		}
+	})
+	window.addEventListener('resize', () => {
+		if (isDesktop()) toggleTOC(false)
 	})
 }
 
@@ -17,10 +28,39 @@ function toggleTheme() {
 	const next = now === 'dark' ? 'light' : 'dark'
 	el.setAttribute('data-theme', next)
 	updateAuthorBackground(next)
-	if (window.onThemeChange) {
-		window.onThemeChange(next)
-	}
+	if (window.onThemeChange) window.onThemeChange(next)
 	localStorage.setItem('theme', next)
+}
+
+const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches
+
+let tocPanel = null
+let tocInitialized = false
+
+function toggleTOC(force) {
+	if (force !== false && isDesktop()) return
+	if (!tocPanel) tocPanel = document.getElementById('toc-mobile')
+	if (!tocPanel) return
+	if (!tocInitialized) initMobileTOC()
+	const open = force ?? !tocPanel.classList.contains('open')
+	if (open === tocPanel.classList.contains('open')) return
+	tocPanel.classList.toggle('open', open)
+	tocPanel.setAttribute('aria-hidden', open ? 'false' : 'true')
+	document.body.classList.toggle('toc-mobile-open', open)
+}
+
+function initMobileTOC() {
+	tocInitialized = true
+	const close = () => toggleTOC(false)
+	tocPanel.querySelectorAll('[data-toc-close]').forEach(btn => btn.addEventListener('click', close))
+	tocPanel.querySelector('.toc-mobile-backdrop')?.addEventListener('click', close)
+	tocPanel.addEventListener('click', e => {
+		if (!tocPanel.classList.contains('open')) return
+		if (e.target.closest('.toc-link')) close()
+	})
+	window.addEventListener('keydown', e => {
+		if (e.key === 'Escape' && tocPanel.classList.contains('open')) close()
+	})
 }
 
 export function updateAuthorBackground(theme) {
@@ -28,11 +68,8 @@ export function updateAuthorBackground(theme) {
 	if (!card) return
 	const bgImg = card.getAttribute('data-bg')
 	const bgImgDark = card.getAttribute('data-bg-dark')
-	if (theme === 'dark' && bgImgDark) {
-		card.style.backgroundImage = `url(${bgImgDark})`
-	} else if (bgImg) {
-		card.style.backgroundImage = `url(${bgImg})`
-	}
+	if (theme === 'dark' && bgImgDark) card.style.backgroundImage = `url(${bgImgDark})`
+	else if (bgImg) card.style.backgroundImage = `url(${bgImg})`
 }
 
 export function initAuthorBackground() {
@@ -41,18 +78,10 @@ export function initAuthorBackground() {
 	const observer = new MutationObserver(mutations => {
 		mutations.forEach(mutation => {
 			if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-				const theme = document.documentElement.getAttribute('data-theme') || 'light'
-				updateAuthorBackground(theme)
+				const next = document.documentElement.getAttribute('data-theme') || 'light'
+				updateAuthorBackground(next)
 			}
 		})
 	})
 	observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-}
-
-function toggleTOC() {
-	const mobileToc = document.getElementById('toc-mobile')
-	if (mobileToc) {
-		const display = getComputedStyle(mobileToc).display
-		mobileToc.style.display = display === 'none' ? 'block' : 'none'
-	}
 }

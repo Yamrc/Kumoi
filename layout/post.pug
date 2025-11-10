@@ -10,9 +10,15 @@ block content
 		//- 		span.sep •
 		//- 		each c in page.categories.toArray()
 		//- 			a.category(href=url_for(c.path))= c.name
-		#toc-mobile
-			nav#toc-mobile-nav
-				ol.toc-list
+		#toc-mobile(aria-hidden='true')
+			.toc-mobile-backdrop(data-toc-close)
+			.toc-mobile-dialog
+				header.toc-mobile-header
+					span= __('toc.title')
+					button.toc-mobile-close(type='button' data-toc-close)
+						i.fas.fa-times
+				nav#toc-mobile-nav
+					ol.toc-list
 		.post-content!= page.content
 	include _partial/mixins/comments
 	+comments_init()
