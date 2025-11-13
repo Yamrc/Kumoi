@@ -1,5 +1,9 @@
 extends _partial/layout
 
+block header
+	if is_home()
+		include _page/hero
+
 block content
 	//- TODO
 	//- if theme.home && theme.home.recommend && theme.home.recommend.enable

@@ -5,8 +5,7 @@ html(lang=config.language)
 	body(class=page.layout)
 		#body-wrap
 			include header/header
-			if is_home()
-				include hero
+			block header
 			.container.layout
 				main#content-inner
 					block content

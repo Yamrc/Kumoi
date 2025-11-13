@@ -1,6 +1,6 @@
 {
 	"name": "hexo-theme-kumoi",
-	"version": "0.3.7",
+	"version": "0.3.8",
 	"description": "A simple theme for Hexo.",
 	"homepage": "https://github.com/yamrc/kumoi",
 	"author": "yamrc <yamrci@outlook.com>",
@@ -14,10 +14,5 @@
 		"url": "https://github.com/yamrc/kumoi"
 	},
 	"license": "MIT",
-	"dependencies": {
-		"hexo-renderer-pug": "^3.0.0",
-		"hexo-renderer-stylus": "^3.0.1",
-		"hexo-util": "^4.0.0"
-	},
 	"packageManager": "pnpm@10.15.0"
 }

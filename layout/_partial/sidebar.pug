@@ -9,14 +9,14 @@ aside#sidebar
 			- const widgetConfig = typeof w === 'object' ? w : { name: w, force: false }
 			- const widgetName = widgetConfig.name || w
 			if widgetName === 'author'
-				include ../widgets/author
+				include ../_widget/author
 			else if widgetName === 'recent_posts'
-				include ../widgets/recent
+				include ../_widget/recent
 			else if widgetName === 'categories'
-				include ../widgets/categories
+				include ../_widget/categories
 			else if widgetName === 'tags'
-				include ../widgets/tags
+				include ../_widget/tags
 			else if widgetName === 'archives'
-				include ../widgets/archives
+				include ../_widget/archives
 			else if widgetName === 'toc' && isPost
-				include ../widgets/toc
+				include ../_widget/toc
