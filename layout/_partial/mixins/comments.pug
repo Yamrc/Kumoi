@@ -3,6 +3,6 @@ mixin comments_init
 		section#comments
 			if theme.plugins.comments.provider === 'giscus'
 				//- 由于giscus暂时没有实现listcount，所以只在这里引入
-				script(type='module').
+				script(type='module' data-pjax).
 					import { mountGiscus } from '/js/adapters/comments/giscus.js'
 					mountGiscus(!{JSON.stringify(theme.plugins.comments.giscus || {})})

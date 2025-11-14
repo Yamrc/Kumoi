@@ -4,6 +4,7 @@ import { initLazyload } from '../modules/lazyload.js'
 import { initLightbox } from '../modules/lightbox.js'
 import { initRightSide, initAuthorBackground } from '../modules/rightside.js'
 import { initNav } from '../modules/nav.js'
+import { initPjax } from '../modules/pjax.js'
 import { Theme } from './theme.js'
 
 function initTheme() {
@@ -20,6 +21,7 @@ export function init() {
 	initRightSide()
 	initNav()
 	initAuthorBackground()
+	initPjax()
 
 	console.debug(`
 く__,.ヘヽ.        /  ,ー､ 〉

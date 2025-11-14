@@ -89,7 +89,7 @@ plugins:
       language: zh-CN # leave empty to fallback to Hexo config
   pjax:
     # PJAX: disable if third-party scripts break
-    enable: true
+    enable: false
   analytics:
     # Analytics: cloudflare | umami (or leave empty to disable)
     provider: # cloudflare | umami

@@ -11,7 +11,7 @@ if theme.plugins && theme.plugins.search
 				.results#local-search-results
 				.search-stats#local-search-stats
 	- const searchStatsText = __('search.stats')
-	script(type='module').
+	script(type='module' data-pjax).
 		import { initSearchModal } from '/js/modules/search-modal.js'
 		import { initLocalSearch } from '/js/adapters/search/local.js'
 		initSearchModal({ onOpen: () => initLocalSearch({ input: '#local-search-input', results: '#local-search-results', stats: '#local-search-stats', i18n: { stats: !{JSON.stringify(searchStatsText)} } }) })

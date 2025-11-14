@@ -2,7 +2,7 @@ doctype html
 html(lang=config.language)
 	head
 		include head
-	body(class=page.layout)
+	body(class=page.layout data-pjax-enable=(theme.plugins && theme.plugins.pjax && theme.plugins.pjax.enable ? 'true' : 'false') data-pjax-exclude=(theme.plugins && theme.plugins.pjax && theme.plugins.pjax.exclude ? JSON.stringify(theme.plugins.pjax.exclude) : '') data-comments-provider=(theme.plugins && theme.plugins.comments && theme.plugins.comments.provider ? theme.plugins.comments.provider : ''))
 		#body-wrap
 			include header/header
 			block header
@@ -13,3 +13,4 @@ html(lang=config.language)
 			include footer
 		include rightside
 		include search-modal
+		.js-pjax
